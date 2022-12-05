@@ -29,7 +29,7 @@ function groupOf(lines, n) {
 	}
 
 	if (group.length > 0) {
-	  linesGrouped.push([...group])
+		linesGrouped.push([...group])
 	}
 
 	return linesGrouped
