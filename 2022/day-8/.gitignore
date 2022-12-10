@@ -17,3 +17,5 @@ tsconfig.json
 node_modules/
 
 *.swp
+
+input*
