@@ -1,5 +1,11 @@
 import * as fs from 'fs'
-import { buildTree, Forest, isTreeVisible, Tree } from './tree'
+import {
+  buildTree,
+  calculateScenicScore,
+  Forest,
+  isTreeVisible,
+  Tree,
+} from './tree'
 
 function main() {
   const filename = process.argv[2] || 'input.txt'
@@ -14,7 +20,17 @@ function main() {
     )
     .reduce((acc, st) => st + acc)
 
-  console.log(visibleTreesCount)
+  console.log(`Number of visible trees: ${visibleTreesCount}`)
+
+  const maxScenicScore = mapForestConnections(parseForest(lines))
+    .map((rows) =>
+      rows
+        .map(calculateScenicScore)
+        .reduce((maxSS, ss) => (ss >= maxSS ? ss : maxSS), 0)
+    )
+    .reduce((maxSS, ss) => (ss > maxSS ? ss : maxSS), 0)
+
+  console.log(`Highest scenic score possible is: ${maxScenicScore}`)
 }
 
 function parseForest(lines: string[]): Forest {

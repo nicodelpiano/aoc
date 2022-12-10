@@ -64,3 +64,69 @@ export function isTreeVisible(t: Tree): boolean {
     isTreeVisibleFrom(t, 'right')
   )
 }
+
+function viewingDistanceFrom(
+  t: Tree,
+  direction: Direction,
+  treeHeight: number
+): number {
+  if (t === 'Empty') {
+    return 0
+  }
+
+  switch (direction) {
+    case 'right':
+      if (t.right === 'Empty') {
+        return 0
+      }
+
+      if (treeHeight <= t.right.height) {
+        return 1
+      }
+
+      return 1 + viewingDistanceFrom(t.right, 'right', treeHeight)
+    case 'left':
+      if (t.left === 'Empty') {
+        return 0
+      }
+
+      if (treeHeight <= t.left.height) {
+        return 1
+      }
+
+      return 1 + viewingDistanceFrom(t.left, 'left', treeHeight)
+    case 'top':
+      if (t.top === 'Empty') {
+        return 0
+      }
+
+      if (treeHeight <= t.top.height) {
+        return 1
+      }
+
+      return 1 + viewingDistanceFrom(t.top, 'top', treeHeight)
+    case 'bottom':
+      if (t.bottom === 'Empty') {
+        return 0
+      }
+
+      if (treeHeight <= t.bottom.height) {
+        return 1
+      }
+
+      return 1 + viewingDistanceFrom(t.bottom, 'bottom', treeHeight)
+  }
+}
+
+export function calculateScenicScore(t: Tree): number {
+  if (t === 'Empty') {
+    return 0
+  }
+
+  return (
+    viewingDistanceFrom(t, 'bottom', t.height) *
+    viewingDistanceFrom(t, 'left', t.height) *
+    viewingDistanceFrom(t, 'top', t.height) *
+    viewingDistanceFrom(t, 'right', t.height)
+  )
+}
