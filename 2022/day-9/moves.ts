@@ -1,4 +1,4 @@
-type Move = 'up' | 'down' | 'right' | 'left'
+export type Move = 'up' | 'down' | 'right' | 'left'
 type HeadRopeMove = {
   n: number
   move: Move
