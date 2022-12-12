@@ -23,7 +23,7 @@ type Registers = {
 }
 
 // Each CPU entry is a cycle
-type CPU = Registers[]
+export type CPU = Registers[]
 
 export function executeProgram(p: Program, cpu: CPU): CPU {
   for (const ins of p) {

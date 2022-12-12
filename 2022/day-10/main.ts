@@ -1,5 +1,6 @@
 import * as fs from 'node:fs'
-import { Program, parseProgram, executeProgram } from './instruction'
+import { executeProgram, parseProgram } from './instruction'
+import { draw } from './sprite'
 
 function main() {
   const inputfile = process.argv[2] || 'input.txt'
@@ -23,6 +24,8 @@ function main() {
   ]
 
   console.log(result.reduce((acc, a) => a + acc))
+
+  draw(finalCPU)
 }
 
 main()
